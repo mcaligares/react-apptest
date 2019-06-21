@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import Footer from './components/footer/Footer';
+import HeaderTop from './components/header/HeaderTop';
+import HeaderCategory from './components/header/HeaderCategory';
+import ProductFilter from './components/product/ProductFilter';
+import ProductList from './components/product/ProductList';
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends React.Component {
 
-export default App;
+  render() {
+    return (
+      <div className="App">
+        <HeaderTop />
+        <HeaderCategory />
+
+        <div className="container">
+          <ProductFilter/>
+          <ProductList />
+        </div>
+
+        <Footer />
+      </div>
+    );
+  }
+
+}

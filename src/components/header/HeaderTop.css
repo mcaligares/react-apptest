@@ -1,0 +1,28 @@
+header.top {
+  display: flex;
+  padding: 10px 20px;
+}
+
+header .spacing {
+  flex-grow: 1;
+}
+
+header .profile {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+header .profile .points {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 20.5px;
+  background-color: #EDEDED;
+}
+
+header .profile .points img {
+  margin-left: 5px;
+}
