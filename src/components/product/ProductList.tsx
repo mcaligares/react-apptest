@@ -1,8 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 import Product from '../../models/Product';
-import loading from '../../assets/loading.svg';
-import './ProductList.css';
+import loading from '../../assets/images/loading.svg';
 
 export default class ProductList extends React.Component<any> {
   render() {

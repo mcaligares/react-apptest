@@ -1,0 +1,98 @@
+@import './variables';
+
+.product {
+  width: 200px;
+  margin: 10px;
+  position: relative;
+  padding: 20px 20px 0 20px;
+  background-color:$white;
+  box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.10);
+
+  @media screen and (max-width: $mobile-width) {
+    width: 100%;
+    margin: 5px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: $mobile-width) and (max-width: $tablet-width) {
+    width: 40%;
+    margin: 5px;
+    text-align: center;
+  }
+
+  &:hover .redeem {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    text-align: center;
+    background-color: rgba($primary, 0.86);
+  }
+
+  .redeem {
+    display: none;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.40);
+    .data {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      p {
+        font-size: 2em;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-block-end: 0.5em;
+        margin-block-start: 0.5em;
+        img {
+          margin-left: 5px;
+          margin-top: auto;
+        }
+      }
+    }
+  }
+
+  &:hover .buy {
+    background-color: $white;
+    > img {
+      filter: invert(25%) sepia(65%) saturate(2484%) hue-rotate(148deg) brightness(105%) contrast(96%);
+    }
+  }
+  .buy {
+    top: 5px;
+    right: 5px;
+    width: 35px;
+    padding: 5px 0;
+    position: absolute;
+    text-align: center;
+    border-radius: 50%;
+    background-color: $primary;
+    > img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  > img {
+    width: 200px;
+  }
+
+  .info {
+    padding: 20px 0 0;
+    border-top: 1px darken($background, 10) solid;
+    span {
+      font-size: 0.9em;
+      color: rgba(0, 0, 0, 0.5);
+    }
+    h2 {
+      margin-top: 5px;
+      font-size: 1em;
+      font-weight: 500;
+    }
+  }
+
+}

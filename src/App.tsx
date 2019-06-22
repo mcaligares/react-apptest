@@ -5,8 +5,7 @@ import HeaderTop from './components/header/HeaderTop';
 import HeaderCategory from './components/header/HeaderCategory';
 import ProductFilter from './components/product/ProductFilter';
 import ProductList from './components/product/ProductList';
-import categoryBackground from './assets/header-category.png';
-import './App.css';
+import categoryBackground from './assets/images/header-category.png';
 
 export default class App extends React.Component<any, any> {
 
@@ -37,10 +36,10 @@ export default class App extends React.Component<any, any> {
         <HeaderTop user={ this.state.user } />
         <HeaderCategory category={ this.electronicCategory } />
 
-        <div className="container">
+        <section className="container">
           <ProductFilter sortValues={ this.sortValues } />
           <ProductList products={ this.state.products } />
-        </div>
+        </section>
 
         <Footer />
       </div>

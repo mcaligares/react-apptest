@@ -1,5 +1,4 @@
 import React from 'react'
-import './ProductFilter.css';
 
 export default class ProductFilter extends React.Component<any, any> {
 
@@ -23,7 +22,7 @@ export default class ProductFilter extends React.Component<any, any> {
         <span>Sort by:</span>
         {
           this.props.sortValues.map((item: any) =>
-            <button className={this.isSelected(item.value)} value={item.value} onClick={this.onSelect}>{item.text}</button>
+            <button className={this.isSelected(item.value) + " button"} value={item.value} onClick={this.onSelect}>{item.text}</button>
           )
         }
       </div>

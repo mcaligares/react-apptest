@@ -1,5 +1,4 @@
 import React from 'react';
-import './HeaderCategory.css';
 
 export default class HeaderCategory extends React.Component<any> {
 

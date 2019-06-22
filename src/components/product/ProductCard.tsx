@@ -1,24 +1,12 @@
 import React from 'react';
-import coin from '../../assets/coin.svg';
-import buyBlue from '../../assets/buy-blue.svg';
-import buyWhite from '../../assets/buy-white.svg';
-import './ProductCard.css';
+import coin from '../../assets/images/coin.svg';
+import shopIcon from '../../assets/images/shop.svg';
 
-export default class ProductCard extends React.Component<any, any> {
-
-  constructor(props: any) {
-    super(props);
-    this.state = { buyIcon: buyBlue };
-    this.toggleIcon = this.toggleIcon.bind(this);
-  }
-
-  toggleIcon() {
-    this.setState({ buyIcon: this.state.buyIcon === buyBlue ? buyWhite : buyBlue });
-  }
+export default class ProductCard extends React.Component<any> {
 
   render() {
     return (
-      <div className="product" onMouseEnter={this.toggleIcon} onMouseLeave={this.toggleIcon}>
+      <div className="product">
 
         <div className="redeem">
           <div className="data">
@@ -30,7 +18,9 @@ export default class ProductCard extends React.Component<any, any> {
           </div>
         </div>
 
-        <img src={this.state.buyIcon} className="buy" alt="buy" />
+        <div className="buy">
+          <img src={shopIcon} alt="" />
+        </div>
 
         <img src={this.props.product.img} alt={this.props.product.name} />
 
