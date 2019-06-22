@@ -6,10 +6,10 @@ class Api {
 
   baseApi: any;
 
-  constructor() {
+  constructor(url: string | undefined, token: string | undefined) {
     this.baseApi = axios.create({
-      baseURL: `https://private-anon-2a54263bc3-aerolabchallenge.apiary-proxy.com/`,
-      headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDBiZGVhZmVhODM3NzAwNmRiMWI1N2UiLCJpYXQiOjE1NjEwNTg5OTF9.kCPNIH2IV_Ec8x-ggY1nDD_9c0IqWgINthgyYmG-G_0'}
+      baseURL: url,
+      headers: { 'Authorization': 'Bearer ' + token }
     });
   }
 
@@ -25,4 +25,4 @@ class Api {
 
 }
 
-export default new Api();
+export default new Api(process.env.REACT_APP_API_URL, process.env.REACT_APP_API_TOKEN);
