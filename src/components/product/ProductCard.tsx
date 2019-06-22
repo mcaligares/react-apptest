@@ -32,7 +32,7 @@ export default class ProductCard extends React.Component<any, any> {
 
         <img src={this.state.buyIcon} className="buy" alt="buy" />
 
-        <img src={this.props.product.img.url} alt={this.props.product.name} />
+        <img src={this.props.product.img} alt={this.props.product.name} />
 
         <div className="info">
           <span>{ this.props.product.category }</span>

@@ -14,6 +14,10 @@ header .profile {
   justify-content: flex-end;
 }
 
+header .profile img.loading {
+  height: 44px;
+}
+
 header .profile .points {
   display: flex;
   align-items: center;

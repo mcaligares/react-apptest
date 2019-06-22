@@ -3,22 +3,17 @@ import './ProductFilter.css';
 
 export default class ProductFilter extends React.Component<any, any> {
 
-  sortValues: any = [
-    { value: 'recent', text: 'Most recent' },
-    { value: 'lower', text: 'Lower price' },
-    { value: 'higher', text: 'Highest price' },
-  ];
   constructor(props: any) {
     super(props);
     this.state = {value: 'recent'};
-    this.onSelected = this.onSelected.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
-  isActive(value: string) {
+  isSelected(value: string) {
     return this.state.value === value ? 'selected' : '';
   }
 
-  onSelected(e: any) {
+  onSelect(e: any) {
     this.setState({ value: e.target.value });
   }
 
@@ -27,8 +22,8 @@ export default class ProductFilter extends React.Component<any, any> {
       <div className="product-filter">
         <span>Sort by:</span>
         {
-          this.sortValues.map((item: any) =>
-            <button className={this.isActive(item.value)} value={item.value} onClick={this.onSelected}>{item.text}</button>
+          this.props.sortValues.map((item: any) =>
+            <button className={this.isSelected(item.value)} value={item.value} onClick={this.onSelect}>{item.text}</button>
           )
         }
       </div>

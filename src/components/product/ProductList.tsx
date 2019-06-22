@@ -1,26 +1,24 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import Product from '../../models/Product';
+import loading from '../../assets/loading.svg';
 import './ProductList.css';
 
-export default class ProductList extends React.Component {
-  list = [
-    {
-      "_id": "5a0b35c1734d1d08bf7084c3",
-      "name": "iPhone 8",
-      "cost": 800,
-      "category": "Phones",
-      "img": {
-        "url": "https://aerolab-challenge.now.sh/images/iPhone8-x1.png",
-        "hdUrl": "https://aerolab-challenge.now.sh/images/iPhone8-x2.png"
-      }
-    }
-  ];
+export default class ProductList extends React.Component<any> {
   render() {
+
+    let element;
+    if (this.props.products.length === 0) {
+      element = <img src={ loading } className="loading" alt="" />;
+    } else {
+      element = this.props.products.map(
+        (product: Product) => <ProductCard product={product} key={product._id} />
+      );
+    }
+
     return (
       <div className="product-list">
-        {
-           this.list.map(item => <ProductCard product={item} key={item._id} />)
-        }
+        { element }
       </div>
     )
   };
