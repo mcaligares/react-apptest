@@ -1,6 +1,11 @@
 import React from 'react'
 
-export default class ProductFilter extends React.Component<any, any> {
+type ProductFilterProps = {
+  sortValues: Array<any>,
+  setFilter: Function
+};
+
+export default class ProductFilter extends React.Component<ProductFilterProps, any> {
 
   constructor(props: any) {
     super(props);
@@ -14,6 +19,7 @@ export default class ProductFilter extends React.Component<any, any> {
 
   onSelect(e: any) {
     this.setState({ value: e.target.value });
+    this.props.setFilter(e.target.value);
   }
 
   render() {

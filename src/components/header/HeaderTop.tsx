@@ -1,18 +1,21 @@
 import React from 'react';
-import { Subscribe, Container } from 'unstated';
-import AppState from '../../Store';
+import User from '../../models/User';
 import HeaderUserPoints from './HeaderUserPoints';
 import loading from '../../assets/images/loading.svg';
 import aerolabLogo from '../../assets/images/logo.svg';
 
-export default class HeaderTop extends React.Component {
+type HeaderTopProps = {
+  user: User
+};
 
-  renderUserProfileOnlyWhenIsAvailable(app: Container<any>) {
-    if (app.state.currentUser._id) {
+export default class HeaderTop extends React.Component<HeaderTopProps> {
+
+  renderUserProfileOnlyWhenIsAvailable() {
+    if (this.props.user._id) {
       return (
         <div className="profile">
-          { app.state.currentUser.name }
-          <HeaderUserPoints points={ app.state.currentUser.points } />
+          { this.props.user.name }
+          <HeaderUserPoints points={ this.props.user.points } />
         </div>
       );
     } else {
@@ -25,9 +28,7 @@ export default class HeaderTop extends React.Component {
       <header className="top">
         <img src={aerolabLogo} alt="AeroLab" />
         <div className="flex-spacing"></div>
-        <Subscribe to={[AppState]}>
-          { app => this.renderUserProfileOnlyWhenIsAvailable(app)}
-        </Subscribe>
+        { this.renderUserProfileOnlyWhenIsAvailable() }
       </header>
     );
   }

@@ -41,7 +41,7 @@
       flex-direction: column;
       justify-content: center;
       p {
-        font-size: 2em;
+        font-size: $big-font;
         color: white;
         display: flex;
         align-items: center;
@@ -62,7 +62,8 @@
       filter: invert(25%) sepia(65%) saturate(2484%) hue-rotate(148deg) brightness(105%) contrast(96%);
     }
   }
-  .buy {
+
+  .price-info {
     top: 5px;
     right: 5px;
     width: 35px;
@@ -75,6 +76,19 @@
       width: 18px;
       height: 18px;
     }
+    &.need {
+      width: auto;
+      color: $white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: $tiny-font;
+      background-color: rgba($primary-color, 0.80);
+      > img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+    }
   }
 
   > img {
@@ -85,12 +99,12 @@
     padding: 20px 0 0;
     border-top: 1px darken($background, 10) solid;
     span {
-      font-size: 0.9em;
+      font-size: $small-font;
       color: rgba(0, 0, 0, 0.5);
     }
     h2 {
       margin-top: 5px;
-      font-size: 1em;
+      font-size: $normal-font;
       font-weight: 500;
     }
   }

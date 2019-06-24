@@ -1,10 +1,12 @@
 import User from "./models/User";
 import { Container } from "unstated";
-import Product from "./models/Product";
+import Product, { sortById, sortByLowerPrice, sortByHigherPrice } from "./models/Product";
 
-type AppStateType = {
+export type AppStateType = {
   currentUser: User,
-  products: Array<Product>
+  products: Array<Product>,
+  setFilter: Function,
+  setUserPoints: Function
 }
 
 export default class AppState extends Container<AppStateType> {
@@ -13,7 +15,9 @@ export default class AppState extends Container<AppStateType> {
     super();
     this.state = {
       currentUser: prop.user,
-      products: prop.products
+      products: prop.products,
+      setFilter: this.setFilter,
+      setUserPoints: this.setUserPoints
     };
   }
 
@@ -24,13 +28,23 @@ export default class AppState extends Container<AppStateType> {
     });
   }
 
-  setUser(user: User) {
-    this.state.currentUser = user;
-  }
-
-  setUserPoints(points: number) {
+  setUserPoints = (points: number) => {
     this.state.currentUser.points = points;
     this.setState({ currentUser: this.state.currentUser });
+  }
+
+  setFilter = (filter: string) => {
+    switch (filter) {
+      case 'lower':
+        this.setState({ products: this.state.products.sort(sortByLowerPrice)});
+        break;
+      case 'higher':
+        this.setState({ products: this.state.products.sort(sortByHigherPrice)});
+        break;
+      default:
+        this.setState({ products: this.state.products.sort(sortById)});
+        break;
+    }
   }
 
 }

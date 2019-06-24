@@ -23,6 +23,16 @@ class Api {
     return response.data.map((product: any) => new Product(product));
   }
 
+  async claimProduct(product: Product, points: number): Promise<number> {
+    try {
+      await this.baseApi.post('redeem', { productId: product._id });
+      return points - product.cost;
+    } catch (e) {
+      console.error('error on claim product', e);
+      return -1;
+    }
+  }
+
 }
 
 export default new Api(process.env.REACT_APP_API_URL, process.env.REACT_APP_API_TOKEN);

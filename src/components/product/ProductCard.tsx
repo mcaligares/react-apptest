@@ -1,35 +1,36 @@
 import React from 'react';
-import coin from '../../assets/images/coin.svg';
-import shopIcon from '../../assets/images/shop.svg';
+import { Subscribe } from 'unstated';
+import AppState from '../../Store';
+import ProductAction from './ProductAction';
+import ProductPrice from './ProductPrice';
+import Product from '../../models/Product';
 
-export default class ProductCard extends React.Component<any> {
+type ProductCardProps = {
+  product: Product
+}
+
+export default class ProductCard extends React.Component<ProductCardProps> {
 
   render() {
     return (
-      <div className="product">
+      <Subscribe to={[AppState]}>
+        { app =>
+          <div className="product">
 
-        <div className="redeem">
-          <div className="data">
-            <p>
-              <span>{ this.props.product.cost }</span>
-              <img src={coin} alt=""/>
-            </p>
-            <button className="button">Redeem now</button>
+            <ProductAction product={ this.props.product } store={app} />
+
+            <ProductPrice points={ app.state.currentUser.points } price={ this.props.product.cost } />
+
+            <img src={this.props.product.img} alt={this.props.product.name} />
+
+            <div className="info">
+              <span>{ this.props.product.category }</span>
+              <h2>{ this.props.product.name }</h2>
+            </div>
           </div>
-        </div>
-
-        <div className="buy">
-          <img src={shopIcon} alt="" />
-        </div>
-
-        <img src={this.props.product.img} alt={this.props.product.name} />
-
-        <div className="info">
-          <span>{ this.props.product.category }</span>
-          <h2>{ this.props.product.name }</h2>
-        </div>
-
-      </div>
+        }
+      </Subscribe>
     );
   }
+
 }

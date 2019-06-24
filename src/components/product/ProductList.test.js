@@ -4,6 +4,7 @@ import AppState from '../../Store';
 import {render, cleanup} from '@testing-library/react';
 import ProductList from './ProductList';
 
+const user = { _id: 1, name: 'Chuck Norris', points: 999999999 };
 const products = [
   {_id: 1, name: 'Ultrabook', category: 'Laptops', cost: 1000, img: '/some/img.svg'},
   {_id: 2, name: 'Ultrabook', category: 'Laptops', cost: 1000, img: '/some/img.svg'}
@@ -11,8 +12,8 @@ const products = [
 
 const renderComponentWithProvider = (products) =>
   render(
-    <Provider inject={[new AppState({products})]}>
-      <ProductList />
+    <Provider inject={[new AppState({products, user})]}>
+      <ProductList products={ products } />
     </Provider>
   );
 

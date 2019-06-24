@@ -14,4 +14,12 @@ export default class Product {
     this.img = data.img.url;
   }
 
-}
+};
+
+const sortById = (productA: Product, productB: Product) => productA._id < productB._id ? -1 : 1;
+
+const sortByLowerPrice = (productA: Product, productB: Product) => productA.cost - productB.cost;
+
+const sortByHigherPrice = (productA: Product, productB: Product) => productB.cost - productA.cost;
+
+export {sortById, sortByLowerPrice, sortByHigherPrice}

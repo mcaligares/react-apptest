@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider } from 'unstated';
+import { Provider, Subscribe } from 'unstated';
 import AppState from './Store';
 import Api from './services/Api';
 import Footer from './components/footer/Footer';
@@ -38,19 +38,25 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Provider inject={[this.container]}>
-          <HeaderTop />
-          <HeaderCategory category={ this.electronicCategory } />
+      <Provider inject={[this.container]}>
+        <Subscribe to={[this.container]}>
+          { app =>
+            <div className="App">
 
-          <section className="container">
-            <ProductFilter sortValues={ this.sortValues } />
-            <ProductList />
-          </section>
+              <HeaderTop user={ app.state.currentUser } />
+              <HeaderCategory category={ this.electronicCategory } />
 
-          <Footer />
-        </Provider>
-      </div>
+              <section className="container">
+                <ProductFilter sortValues={ this.sortValues } setFilter={ app.state.setFilter } />
+                <ProductList products={ app.state.products } />
+              </section>
+
+              <Footer />
+
+            </div>
+          }
+        </Subscribe>
+      </Provider>
     );
   }
 
