@@ -1,44 +1,71 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [React Test](http:munaylab.org/react-test) &middot; [![CircleCI Status](https://circleci.com/gh/mcaligares/react-apptest.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/mcaligares/react-apptest)
 
-## Available Scripts
+Aplicación de prueba realizada con [React](https://github.com/facebook/react) que consiste en un catalogo de productos que pueden ser canjeados.
 
-In the project directory, you can run:
+## Mejoras
 
-### `npm start`
+#### React con TypeScript
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+##### Problema
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+En la [guía para comenzar el reto](https://medium.com/aerolab-stories/a-quick-guide-to-even-quicker-deployments-4fea75662fb) hace referencia al comando.
 
-### `npm test`
+``` bash
+create-react-app name-of-your-app
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+El problema es que en la documentación de React todos los ejemplos estan en **TypeScript**.
 
-### `npm run build`
+##### Solución
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Agregué **TypScript** al proyecto usando el parámetro `--typescript`.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+``` bash
+create-react-app name-of-your-app --typescript
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Pruebas Unitarias
 
-### `npm run eject`
+Agregué pruebas unitarias de los componentes. Utilicé [Jest](https://github.com/facebook/jest) y la librería [react-testing-library](https://github.com/testing-library/react-testing-library) para simplificar lógica.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Los test se pueden correr usando el comando `yarn test`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Icono bolsa de compras
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### Problema
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+El icono de `bolsa de compras` del componente **ProductCard** cambia cuando el mouse se encima. Si utilizamos 2 iconos, al inspeccionar el elemento podemos ver que se renderizan cada vez que pasamos el mouse.
 
-## Learn More
+##### Solución
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Se utiliza un único icono y cambiamos el color mediante estilos.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+#### Manejador de estados
+
+##### Problema
+
+Se utilizó el `state` de los componentes para pasarlo como parametro y así interactuar entre componentes. La accion, que realiza un usuario cuando canjea un producto y se descuentan sus puntos involucra la comuncación de varios componentes.
+
+##### Solución
+
+Se implementó un manejador de estados. Utilizamos [Unstated](https://github.com/jamiebuilds/unstated) en vez de [Redux](https://github.com/reduxjs/redux) por que es mucho más simple, liviano y práctico.
+
+#### Estilos
+
+Se implementó [node-sass](https://github.com/sass/node-sass) para evitar escribir CSS puro y utilizar un solo archivo de estilos (`/assets/styles/theme.scss`).
+
+#### Versionado
+
+Se utilizó una cuenta en github para crear y subir el proyecto.
+La primera version de la aplicación se liberó el Lunes 24 utilizando el tag name `v1.0.0`.
+Desde ese punto se hizo un branch llamado `develop` donde se desarrolló todas las features. Cada vez que se terminaba una feature se realizaba el merge con `master` y luego se publicaba un nuevo tag.
+
+#### Changelog
+
+Se utilizó un archivo `CHANGELOG.md` para documentar los cambios realizados. El formato del archivo está basado en el template de [Keep A Changelog](https://keepachangelog.com/en/1.0.0/).
+
+#### Integración continua
+
+Como **GitHub** no usa pipelines como **GitLab** o **Bitbuket**, utilicé [CircleCi](https://circleci.com) para poder correr los test y garantizar una integridad de la aplicación.
+El historial de los builds se pueden ver en [mcaligares/react-test](https://circleci.com/gh/mcaligares/react-apptest).
