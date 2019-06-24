@@ -1,4 +1,6 @@
 import React from 'react';
+import { Provider } from 'unstated';
+import AppState from './Store';
 import Api from './services/Api';
 import Footer from './components/footer/Footer';
 import HeaderTop from './components/header/HeaderTop';
@@ -6,8 +8,17 @@ import HeaderCategory from './components/header/HeaderCategory';
 import ProductFilter from './components/product/ProductFilter';
 import ProductList from './components/product/ProductList';
 import categoryBackground from './assets/images/header-category.png';
+import User from './models/User';
 
-export default class App extends React.Component<any, any> {
+const emptyUser = new User({});
+
+export default class App extends React.Component {
+
+  user: User;
+  container = new AppState({
+    products: [],
+    user: emptyUser
+  });
 
   electronicCategory = {
     title: 'Electronics',
@@ -20,28 +31,25 @@ export default class App extends React.Component<any, any> {
     { value: 'higher', text: 'Highest price' },
   ];
 
-  constructor(props: any) {
-    super(props);
-    this.state = { user: null, products: [] }
-  }
-
-  async componentDidMount() {
-    this.setState({ user: await Api.getUser(), products: await Api.getAllProducts() });
+  componentDidMount() {
+    Promise.all([Api.getUser(), Api.getAllProducts()]).then(results =>
+      this.container.setUserAndProducts(results));
   }
 
   render() {
-
     return (
       <div className="App">
-        <HeaderTop user={ this.state.user } />
-        <HeaderCategory category={ this.electronicCategory } />
+        <Provider inject={[this.container]}>
+          <HeaderTop />
+          <HeaderCategory category={ this.electronicCategory } />
 
-        <section className="container">
-          <ProductFilter sortValues={ this.sortValues } />
-          <ProductList products={ this.state.products } />
-        </section>
+          <section className="container">
+            <ProductFilter sortValues={ this.sortValues } />
+            <ProductList />
+          </section>
 
-        <Footer />
+          <Footer />
+        </Provider>
       </div>
     );
   }

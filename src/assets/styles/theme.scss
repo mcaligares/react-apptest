@@ -25,9 +25,6 @@ body {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-
-      img.loading { height: 44px; }
-
       .points {
         display: flex;
         align-items: center;
@@ -35,10 +32,10 @@ body {
         padding: 5px 10px;
         border-radius: 20.5px;
         background-color: $secondary;
-
         img { margin-left: 5px; }
       }
     }
+    img.loading { height: 44px; }
     &.category {
       height: 400px;
       display: flex;
