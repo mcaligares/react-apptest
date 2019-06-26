@@ -36,7 +36,7 @@ export default class ProductAction extends React.Component<ProductActionProps> {
 
   haveUserEnoughPointsToRedeemProduct() {
     const pointsNeeded = this.props.product.cost - this.props.store.state.currentUser.points;
-    return pointsNeeded < 0;
+    return pointsNeeded <= 0;
   }
 
   render() {

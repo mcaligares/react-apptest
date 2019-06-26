@@ -12,9 +12,9 @@ export default class ProductPrice extends React.Component<ProductPriceProps> {
   render() {
     const pointsNeeded = this.props.price - this.props.points;
 
-    if (pointsNeeded < 0) {
+    if (pointsNeeded <= 0) {
       return (
-        <div className="price-info">
+        <div className="price">
           <img src={shopIcon} alt="" />
         </div>
       );
