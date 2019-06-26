@@ -24,9 +24,9 @@ test('product list should show two products', () => {
   expect(container.querySelectorAll('.product').length).toBe(2);
 });
 
-test('product list should show loading icon when products is empty', () => {
+test('product list should show a not found message when products is empty', () => {
   const {container} = renderComponentWithProvider([]);
   expect(container.querySelectorAll('.product').length).toBe(0);
-  expect(container.querySelector('img').className).toEqual('loading');
+  expect(container.querySelector('.product-empty').textContent).toContain('No products found');
 });
 

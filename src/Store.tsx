@@ -1,36 +1,54 @@
 import User from "./models/User";
 import { Container } from "unstated";
-import Product, { sortById, sortByLowerPrice, sortByHigherPrice } from "./models/Product";
+import Product, { sortById, sortByLowerPrice, sortByHigherPrice, filterByName } from "./models/Product";
 
 export type AppStateType = {
+  loading: boolean,
+  sortBy: Function,
+  searchFor: Function,
+  setUserPoints: Function
   currentUser: User,
   products: Array<Product>,
-  sortBy: Function,
-  setUserPoints: Function
+  filteredProducts: Array<Product>,
 }
 
 export default class AppState extends Container<AppStateType> {
 
-  constructor(prop: any = {}) {
+  constructor(props: any = {}) {
     super();
     this.state = {
-      currentUser: prop.user,
-      products: prop.products,
+      loading: props.loading,
+      currentUser: props.user,
+      products: props.products,
+      filteredProducts: props.filteredProducts,
       sortBy: this.sortBy,
+      searchFor: this.searchFor,
       setUserPoints: this.setUserPoints
     };
   }
 
   setUserAndProducts(results: any) {
     this.setState({
+      loading: false,
       currentUser: results[0],
-      products: results[1]
+      products: results[1],
+      filteredProducts: results[1]
     });
   }
 
   setUserPoints = (points: number) => {
     this.state.currentUser.points = points;
     this.setState({ currentUser: this.state.currentUser });
+  }
+
+  searchFor = (search: string) => {
+    if (search.length >= 3) {
+      this.setState({
+        filteredProducts: this.state.products.filter((product: Product) => filterByName(product, search))
+      });
+    } else {
+      this.setState({ filteredProducts: this.state.products });
+    }
   }
 
   sortBy = (filter: string) => {

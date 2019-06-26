@@ -16,6 +16,7 @@ export default class App extends React.Component {
 
   user: User;
   container = new AppState({
+    loading: true,
     products: [],
     user: emptyUser
   });
@@ -46,8 +47,11 @@ export default class App extends React.Component {
               <HeaderTop user={ app.state.currentUser } />
               <HeaderCategory category={ this.electronicCategory } />
 
-              <ProductList products={ app.state.products } >
-                <Header sort={{ values: this.sortValues, sortBy: app.state.sortBy }} />
+              <ProductList products={ app.state.filteredProducts } loading={ app.state.loading }>
+                <Header
+                  search={{ searchFor: app.state.searchFor }}
+                  sort={{ values: this.sortValues, sortBy: app.state.sortBy }}
+                />
               </ProductList>
 
               <Footer />

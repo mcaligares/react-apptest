@@ -68,6 +68,13 @@ body {
     border-bottom: 1px darken($background, 10) solid;
     img.loading { height: 50px; }
   }
+  .product-empty {
+    padding: 30px;
+    color: lighten($primary, 20);
+    text-align: center;
+    h1 { font-size: $huge-font; }
+    h3 { font-size: $big-font; }
+  }
 
   .product-header {
     display: flex;

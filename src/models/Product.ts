@@ -22,4 +22,9 @@ const sortByLowerPrice = (productA: Product, productB: Product) => productA.cost
 
 const sortByHigherPrice = (productA: Product, productB: Product) => productB.cost - productA.cost;
 
-export {sortById, sortByLowerPrice, sortByHigherPrice}
+const filterByName = (product: Product, text: string) => {
+  return product.name.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) >= 0
+      || product.category.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) >= 0
+};
+
+export {sortById, sortByLowerPrice, sortByHigherPrice, filterByName}
