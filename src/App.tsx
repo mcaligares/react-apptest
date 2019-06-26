@@ -5,10 +5,10 @@ import Api from './services/Api';
 import Footer from './components/footer/Footer';
 import HeaderTop from './components/header/HeaderTop';
 import HeaderCategory from './components/header/HeaderCategory';
-import Sort from './components/product/header/Sort';
 import ProductList from './components/product/ProductList';
 import categoryBackground from './assets/images/header-category.png';
 import User from './models/User';
+import Header from './components/product/header/Header';
 
 const emptyUser = new User({});
 
@@ -47,7 +47,7 @@ export default class App extends React.Component {
               <HeaderCategory category={ this.electronicCategory } />
 
               <ProductList products={ app.state.products } >
-                <Sort values={ this.sortValues } sortBy={ app.state.sortBy } />
+                <Header sort={{ values: this.sortValues, sortBy: app.state.sortBy }} />
               </ProductList>
 
               <Footer />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-type SortProps = {
+export type SortProps = {
   values: Array<any>,
   sortBy: Function
 };
@@ -24,7 +24,7 @@ export default class Sort extends React.Component<SortProps, any> {
 
   render() {
     return (
-      <div className="product-filter">
+      <div className="sort">
         <span>Sort by:</span>
         {
           this.props.values.map((item: any) =>
