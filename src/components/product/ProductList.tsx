@@ -21,9 +21,12 @@ export default class ProductList extends React.Component<ProductListProps> {
 
   render() {
     return (
-      <div className="product-list">
-        { this.renderProducts() }
-      </div>
+      <section className="container">
+        { this.props.children }
+        <div className="product-list">
+          { this.renderProducts() }
+        </div>
+      </section>
     )
   }
 

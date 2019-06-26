@@ -1,13 +1,13 @@
 import React from 'react';
 import {render, cleanup, fireEvent} from '@testing-library/react';
-import ProductFilter from './ProductFilter';
+import Sort from './Sort';
 
 const setFilterMock = jest.fn();
 const sortValues = [
   { value: '1', text: 'vue' },
   { value: '2', text: 'react' }
 ];
-const element = <ProductFilter sortValues={ sortValues } setFilter={ setFilterMock } />
+const element = <Sort values={ sortValues } sortBy={ setFilterMock } />
 
 afterEach(cleanup);
 

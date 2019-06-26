@@ -1,11 +1,11 @@
 import React from 'react'
 
-type ProductFilterProps = {
-  sortValues: Array<any>,
-  setFilter: Function
+type SortProps = {
+  values: Array<any>,
+  sortBy: Function
 };
 
-export default class ProductFilter extends React.Component<ProductFilterProps, any> {
+export default class Sort extends React.Component<SortProps, any> {
 
   constructor(props: any) {
     super(props);
@@ -19,7 +19,7 @@ export default class ProductFilter extends React.Component<ProductFilterProps, a
 
   onSelect(e: any) {
     this.setState({ value: e.target.value });
-    this.props.setFilter(e.target.value);
+    this.props.sortBy(e.target.value);
   }
 
   render() {
@@ -27,7 +27,7 @@ export default class ProductFilter extends React.Component<ProductFilterProps, a
       <div className="product-filter">
         <span>Sort by:</span>
         {
-          this.props.sortValues.map((item: any) =>
+          this.props.values.map((item: any) =>
             <button className={this.isSelected(item.value) + " button"} value={item.value} onClick={this.onSelect} key={item.value}>{item.text}</button>
           )
         }

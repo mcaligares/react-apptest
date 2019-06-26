@@ -5,7 +5,7 @@ import Api from './services/Api';
 import Footer from './components/footer/Footer';
 import HeaderTop from './components/header/HeaderTop';
 import HeaderCategory from './components/header/HeaderCategory';
-import ProductFilter from './components/product/ProductFilter';
+import Sort from './components/product/header/Sort';
 import ProductList from './components/product/ProductList';
 import categoryBackground from './assets/images/header-category.png';
 import User from './models/User';
@@ -46,10 +46,9 @@ export default class App extends React.Component {
               <HeaderTop user={ app.state.currentUser } />
               <HeaderCategory category={ this.electronicCategory } />
 
-              <section className="container">
-                <ProductFilter sortValues={ this.sortValues } setFilter={ app.state.setFilter } />
-                <ProductList products={ app.state.products } />
-              </section>
+              <ProductList products={ app.state.products } >
+                <Sort values={ this.sortValues } sortBy={ app.state.sortBy } />
+              </ProductList>
 
               <Footer />
 

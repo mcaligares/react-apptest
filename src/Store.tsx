@@ -5,7 +5,7 @@ import Product, { sortById, sortByLowerPrice, sortByHigherPrice } from "./models
 export type AppStateType = {
   currentUser: User,
   products: Array<Product>,
-  setFilter: Function,
+  sortBy: Function,
   setUserPoints: Function
 }
 
@@ -16,7 +16,7 @@ export default class AppState extends Container<AppStateType> {
     this.state = {
       currentUser: prop.user,
       products: prop.products,
-      setFilter: this.setFilter,
+      sortBy: this.sortBy,
       setUserPoints: this.setUserPoints
     };
   }
@@ -33,7 +33,7 @@ export default class AppState extends Container<AppStateType> {
     this.setState({ currentUser: this.state.currentUser });
   }
 
-  setFilter = (filter: string) => {
+  sortBy = (filter: string) => {
     switch (filter) {
       case 'lower':
         this.setState({ products: this.state.products.sort(sortByLowerPrice)});
