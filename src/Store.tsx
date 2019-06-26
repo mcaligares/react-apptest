@@ -20,7 +20,7 @@ export default class AppState extends Container<AppStateType> {
       loading: props.loading,
       currentUser: props.user,
       products: props.products,
-      filteredProducts: props.filteredProducts,
+      filteredProducts: props.products,
       sortBy: this.sortBy,
       searchFor: this.searchFor,
       setUserPoints: this.setUserPoints

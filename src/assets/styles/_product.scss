@@ -20,75 +20,22 @@
     text-align: center;
   }
 
-  &:hover .redeem {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    text-align: center;
-    background-color: rgba($primary, 0.86);
-  }
-
-  .redeem {
-    display: none;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.40);
-    .data {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-      p {
-        font-size: $big-font;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-block-end: 0.5em;
-        margin-block-start: 0.5em;
-        img {
-          margin-left: 5px;
-          margin-top: auto;
-        }
-      }
-    }
-  }
-
-  &:hover .buy {
-    background-color: $white;
-    > img {
-      filter: invert(25%) sepia(65%) saturate(2484%) hue-rotate(148deg) brightness(105%) contrast(96%);
-    }
-  }
-
-  .price-info {
-    top: 5px;
-    right: 5px;
-    width: 35px;
+  .price {
+    top: -4px;
+    right: 0;
+    width: auto;
     padding: 5px 0;
     position: absolute;
     text-align: center;
-    border-radius: 50%;
-    background-color: $primary;
+    color: lighten($primary-color, 20);
+    cursor: default;
+    > span { font-size: $big-font; }
     > img {
-      width: 18px;
-      height: 18px;
+      width: 30px;
+      height: 30px;
+      vertical-align: text-bottom;
     }
-    &.need {
-      width: auto;
-      color: $white;
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-size: $tiny-font;
-      background-color: rgba($primary-color, 0.80);
-      > img {
-        width: 20px;
-        height: 20px;
-        vertical-align: middle;
-      }
-    }
+    &.redeem { color: lighten($primary, 20); }
   }
 
   > img {
