@@ -54,13 +54,13 @@ export default class AppState extends Container<AppStateType> {
   sortBy = (filter: string) => {
     switch (filter) {
       case 'lower':
-        this.setState({ products: this.state.products.sort(sortByLowerPrice)});
+        this.setState({ filteredProducts: this.state.filteredProducts.sort(sortByLowerPrice)});
         break;
       case 'higher':
-        this.setState({ products: this.state.products.sort(sortByHigherPrice)});
+        this.setState({ filteredProducts: this.state.filteredProducts.sort(sortByHigherPrice)});
         break;
       default:
-        this.setState({ products: this.state.products.sort(sortById)});
+        this.setState({ filteredProducts: this.state.filteredProducts.sort(sortById)});
         break;
     }
   }
