@@ -1,12 +1,14 @@
 import User from "./models/User";
 import { Container } from "unstated";
 import Product, { sortById, sortByLowerPrice, sortByHigherPrice, filterByName } from "./models/Product";
+import Api from "./services/Api";
 
 export type AppStateType = {
   loading: boolean,
   sortBy: Function,
   searchFor: Function,
-  setUserPoints: Function
+  setUserPoints: Function,
+  redeemProduct: Function,
   currentUser: User,
   products: Array<Product>,
   filteredProducts: Array<Product>,
@@ -23,7 +25,8 @@ export default class AppState extends Container<AppStateType> {
       filteredProducts: props.products,
       sortBy: this.sortBy,
       searchFor: this.searchFor,
-      setUserPoints: this.setUserPoints
+      setUserPoints: this.setUserPoints,
+      redeemProduct: this.redeemProduct
     };
   }
 
@@ -39,6 +42,23 @@ export default class AppState extends Container<AppStateType> {
   setUserPoints = (points: number) => {
     this.state.currentUser.points = points;
     this.setState({ currentUser: this.state.currentUser });
+  }
+
+  redeemProduct = async (product: Product) => {
+    const points = this.state.currentUser.points;
+    const wasRedeemed = (pointsUpdated: number) => pointsUpdated >= 0;
+    const haveUserEnoughPointsToRedeemProduct = (price: number, points: number) => points - price >= 0;
+
+    if (haveUserEnoughPointsToRedeemProduct(product.cost, points)) {
+      const pointsUpdated = await Api.claimProduct(product, points);
+      if (wasRedeemed(pointsUpdated)) {
+        this.setUserPoints(pointsUpdated);
+      } else {
+        console.error('user could not redeem the product');
+      }
+    } else {
+      console.error('user dont have enough point to redeem the product');
+    }
   }
 
   searchFor = (search: string) => {

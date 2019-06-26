@@ -3,6 +3,7 @@ import { Subscribe } from 'unstated';
 import AppState from '../../Store';
 import ProductPrice from './ProductPrice';
 import Product from '../../models/Product';
+import ProductAction from './ProductAction';
 
 type ProductCardProps = {
   product: Product
@@ -23,6 +24,8 @@ export default class ProductCard extends React.Component<ProductCardProps> {
               <span>{ this.props.product.category }</span>
               <h2>{ this.props.product.name }</h2>
             </div>
+
+            <ProductAction product={ this.props.product } points={ app.state.currentUser.points } redeemProduct={ app.state.redeemProduct } />
           </div>
         }
       </Subscribe>

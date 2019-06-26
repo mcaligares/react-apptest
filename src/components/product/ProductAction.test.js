@@ -1,20 +1,21 @@
 import React from 'react';
-import {render, cleanup } from '@testing-library/react';
+import {render, cleanup, fireEvent } from '@testing-library/react';
 import ProductAction from './ProductAction';
-import AppState from '../../Store';
 
 const product = {_id: 1, name: 'Ultrabook', category: 'Laptops', cost: 1000, img: '/some/img.svg'};
-const renderElementWith = (p, user) => render(<ProductAction product={p} store={new AppState({user})} />);
+const renderElementWith = (p, points, onRedeem) => render(<ProductAction product={p} points={points} redeemProduct={onRedeem} />);
 
 afterEach(cleanup);
 
-test('product action should hide the component when user do not have enough points', () => {
-  const {container} = renderElementWith(product, {points: 100 });
-  expect(container.textContent).toEqual('');
+test('product action should show the needed points when user do not have enough points', () => {
+  const {container} = renderElementWith(product, 100, () => {});
+  expect(container.textContent).toContain('You need 900');
 });
 
-test('product action should show the price and button when user have enough points', () => {
-  const {container} = renderElementWith(product, {points: 10000 });
+test('product action should show the button when user have enough points', () => {
+  const redeemProductMock = jest.fn();
+  const {container} = renderElementWith(product, 1000, redeemProductMock);
   expect(container.querySelectorAll('button').length).toBe(1);
-  expect(container.querySelector('span').textContent).toEqual(product.cost.toString());
+  fireEvent.click(container.querySelector('button'));
+  expect(redeemProductMock).toBeCalled();
 });
