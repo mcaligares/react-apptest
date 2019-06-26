@@ -17,13 +17,20 @@ body {
 
   header {
     &.top {
+      z-index: 99;
+      width: 98vw;
       display: flex;
+      position: fixed;
       padding: 10px 20px;
+      height: $header-height;
+      background-color: $background;
+      box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.10);
     }
     .profile {
       font-weight: 500;
       display: flex;
       align-items: center;
+      padding-right: 20px;
       justify-content: flex-end;
       .points {
         display: flex;
@@ -37,9 +44,9 @@ body {
     }
     img.loading { height: 44px; }
     &.category {
-      height: 400px;
       display: flex;
       align-items: flex-end;
+      height: 400px + $header-height;
 
       h1 {
         padding: 40px;
