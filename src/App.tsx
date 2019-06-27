@@ -1,14 +1,13 @@
 import React from 'react';
 import { Provider, Subscribe } from 'unstated';
 import AppState from './Store';
-import Api from './services/Api';
+import User from './models/User';
 import Footer from './components/footer/Footer';
 import HeaderTop from './components/header/HeaderTop';
+import Header from './components/product/header/Header';
 import HeaderCategory from './components/header/HeaderCategory';
 import ProductList from './components/product/ProductList';
 import categoryBackground from './assets/images/header-category.png';
-import User from './models/User';
-import Header from './components/product/header/Header';
 
 const emptyUser = new User({});
 
@@ -33,8 +32,7 @@ export default class App extends React.Component {
   ];
 
   componentDidMount() {
-    Promise.all([Api.getUser(), Api.getAllProducts()]).then(results =>
-      this.container.setUserAndProducts(results));
+    this.container.fetchAllData();
   }
 
   render() {

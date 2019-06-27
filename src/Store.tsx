@@ -34,12 +34,14 @@ export default class AppState extends Container<AppStateType> {
     };
   }
 
-  setUserAndProducts(results: any) {
-    this.setState({
-      loading: false,
-      currentUser: results[0],
-      products: results[1],
-      filteredProducts: results[1]
+  fetchAllData() {
+    Promise.all([Api.getUser(), Api.getAllProducts()]).then(results => {
+      this.setState({
+        loading: false,
+        currentUser: results[0],
+        products: results[1],
+        filteredProducts: results[1]
+      });
     });
   }
 
