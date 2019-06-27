@@ -5,10 +5,12 @@ import Api from "./services/Api";
 
 export type AppStateType = {
   loading: boolean,
+  userPointsChanged: number,
   sortBy: Function,
   searchFor: Function,
   setUserPoints: Function,
   redeemProduct: Function,
+  restoreUserPointsChanged: Function,
   currentUser: User,
   products: Array<Product>,
   filteredProducts: Array<Product>,
@@ -19,6 +21,7 @@ export default class AppState extends Container<AppStateType> {
   constructor(props: any = {}) {
     super();
     this.state = {
+      userPointsChanged: 0,
       loading: props.loading,
       currentUser: props.user,
       products: props.products,
@@ -26,7 +29,8 @@ export default class AppState extends Container<AppStateType> {
       sortBy: this.sortBy,
       searchFor: this.searchFor,
       setUserPoints: this.setUserPoints,
-      redeemProduct: this.redeemProduct
+      redeemProduct: this.redeemProduct,
+      restoreUserPointsChanged: this.restoreUserPointsChanged
     };
   }
 
@@ -39,9 +43,13 @@ export default class AppState extends Container<AppStateType> {
     });
   }
 
-  setUserPoints = (points: number) => {
-    this.state.currentUser.points = points;
-    this.setState({ currentUser: this.state.currentUser });
+  setUserPoints = (total: number, points: number) => {
+    this.state.currentUser.points = total;
+    this.setState({ currentUser: this.state.currentUser, userPointsChanged: points });
+  }
+
+  restoreUserPointsChanged = () => {
+    this.setState({ userPointsChanged: 0 });
   }
 
   redeemProduct = async (product: Product) => {
@@ -52,13 +60,15 @@ export default class AppState extends Container<AppStateType> {
     if (haveUserEnoughPointsToRedeemProduct(product.cost, points)) {
       const pointsUpdated = await Api.claimProduct(product, points);
       if (wasRedeemed(pointsUpdated)) {
-        this.setUserPoints(pointsUpdated);
+        this.setUserPoints(pointsUpdated, -product.cost);
+        return true;
       } else {
         console.error('user could not redeem the product');
       }
     } else {
       console.error('user dont have enough point to redeem the product');
     }
+    return false;
   }
 
   searchFor = (search: string) => {

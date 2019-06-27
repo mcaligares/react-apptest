@@ -40,6 +40,23 @@ body {
         border-radius: 20.5px;
         background-color: $secondary;
         img { margin-left: 5px; }
+        .change {
+          display: none;
+          position: absolute;
+          &.ko { color: $red; }
+          &.ok { color: $green; }
+        }
+        .change-enter-active {
+          display: block;
+          &.ok {
+            -webkit-animation: fade-up 1s linear forwards;
+                    animation: fade-up 1s linear forwards;
+          }
+          &.ko {
+            -webkit-animation: fade-down 1s linear forwards;
+                    animation: fade-down 1s linear forwards;
+          }
+        }
       }
     }
     img.loading { height: 44px; }
