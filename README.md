@@ -69,3 +69,13 @@ Se utilizó un archivo `CHANGELOG.md` para documentar los cambios realizados. El
 
 Como **GitHub** no usa pipelines como **GitLab** o **Bitbuket**, utilicé [CircleCi](https://circleci.com) para poder correr los test y garantizar una integridad de la aplicación.
 El historial de los builds se pueden ver en [mcaligares/react-test](https://circleci.com/gh/mcaligares/react-apptest).
+
+#### Opción "Redeem now"
+
+El reto pedía que la opcion de canjear un producto apareciera cuando el usuario interactuaba con él. Se realizó una modificación en la cual se agregó el botón de canje en el producto.
+
+Éste criterio se tomó para simplificar la acción de canjear. Del modo que se solicitaba, el usuario debía realizar dos acciones para concretar el canje. La primer acción es acercar el mouse al producto y la segunda es hacer click en el boton. Con la modificación le toma solo una acción ya que el boton siempre está visible.
+
+#### Buscador de productos
+
+Se agregó un buscador que realiza un filtro por nombre de producto y por nombre de categoría.
