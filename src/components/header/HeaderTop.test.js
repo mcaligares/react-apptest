@@ -1,15 +1,18 @@
 import React from 'react';
-import {render, cleanup} from '@testing-library/react';
 import { Provider } from 'unstated';
+import {render, cleanup} from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AppState from '../../Store';
 import HeaderTop from './HeaderTop';
 
 const user = { _id: 1, name: 'Chuck Norris', points: 999999999 };
 const getTextFromProfile = (container) => container.querySelector('.profile').textContent;
 const renderComponentWithProvider = (user) => render(
-  <Provider inject={[new AppState({ user })]}>
-      <HeaderTop user={user} />
-  </Provider>
+  <Router>
+    <Provider inject={[new AppState({ user })]}>
+        <HeaderTop user={user} />
+    </Provider>
+  </Router>
 
 );
 

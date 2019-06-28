@@ -1,0 +1,30 @@
+@import './variables';
+
+.profile-page {
+  display: flex;
+  height: 90vh;
+  padding: 50px;
+  color: $white;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: darken($color: $primary, $amount: 10);
+
+  >img.loading {
+    width: 100px;
+  }
+
+  > a > img {
+    right: 30px;
+    width: 30px;
+    position: absolute;
+    top: 40px + $header-height;
+  }
+
+  > p {
+    font-size: $big-font;
+    i { font-style: normal; }
+    img { vertical-align: middle; }
+    span:not([role]) { text-decoration: underline; }
+  }
+}

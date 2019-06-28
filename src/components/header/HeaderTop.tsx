@@ -1,5 +1,6 @@
 import React from 'react';
 import { Subscribe } from 'unstated';
+import { Link } from 'react-router-dom';
 import AppState from '../../Store';
 import User from '../../models/User';
 import HeaderUserPoints from './HeaderUserPoints';
@@ -12,27 +13,27 @@ type HeaderTopProps = {
 
 export default class HeaderTop extends React.Component<HeaderTopProps> {
 
-  renderUserProfileOnlyWhenIsAvailable(app: any) {
-    if (this.props.user._id) {
-      return (
-        <div className="profile">
-          { this.props.user.name }
-          <HeaderUserPoints points={ this.props.user.points } pointsChanged={ app.state.userPointsChanged } restorePointsChanged={ app.restoreUserPointsChanged } />
-        </div>
-      );
-    } else {
-      return <img src={loading} className="loading" alt="" />;
-    }
-  }
-
   render() {
     return (
       <Subscribe to={[AppState]}>
         { app =>
           <header className="top">
-            <img src={aerolabLogo} alt="AeroLab" />
+            <Link to="/">
+              <img src={aerolabLogo} alt="AeroLab" />
+            </Link>
             <div className="flex-spacing"></div>
-            { this.renderUserProfileOnlyWhenIsAvailable(app) }
+            {
+              !this.props.user._id && <img src={loading} className="loading" alt="" />
+            }
+            {
+              this.props.user._id &&
+              <Link to="/profile">
+                <div className="profile">
+                  { this.props.user.name }
+                  <HeaderUserPoints points={ this.props.user.points } pointsChanged={ app.state.userPointsChanged } restorePointsChanged={ app.state.restoreUserPointsChanged } />
+                </div>
+              </Link>
+            }
           </header>
         }
       </Subscribe>

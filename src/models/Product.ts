@@ -7,11 +7,11 @@ export default class Product {
   img: string;
 
   constructor(data: any) {
-    this._id = data._id;
+    this._id = data.productId || data._id;
     this.name = data.name;
     this.category = data.category;
     this.cost = data.cost;
-    this.img = data.img.url;
+    this.img = data.img ? data.img.url : '';
   }
 
 };

@@ -33,6 +33,11 @@ class Api {
     }
   }
 
+  async getHistory(): Promise<Array<Product>> {
+    const response = await this.baseApi.get('user/history');
+    return response.data.map((product: any) => new Product(product));
+  }
+
 }
 
 export default new Api(process.env.REACT_APP_API_URL, process.env.REACT_APP_API_TOKEN);
