@@ -1,6 +1,6 @@
 import React from 'react';
 import { Subscribe } from 'unstated';
-import AppState from '../../Store';
+import UserStore from '../../store/UserStore';
 import ProductPrice from './ProductPrice';
 import Product from '../../models/Product';
 import ProductAction from './ProductAction';
@@ -13,10 +13,10 @@ export default class ProductCard extends React.Component<ProductCardProps> {
 
   render() {
     return (
-      <Subscribe to={[AppState]}>
-        { app =>
+      <Subscribe to={[UserStore]}>
+        { store  =>
           <div className="product">
-            <ProductPrice points={ app.state.currentUser.points } price={ this.props.product.cost } />
+            <ProductPrice points={ store.state.currentUser.points } price={ this.props.product.cost } />
 
             <img src={this.props.product.img} alt={this.props.product.name} />
 
@@ -25,7 +25,11 @@ export default class ProductCard extends React.Component<ProductCardProps> {
               <h2>{ this.props.product.name }</h2>
             </div>
 
-            <ProductAction product={ this.props.product } points={ app.state.currentUser.points } redeemProduct={ app.state.redeemProduct } />
+            <ProductAction
+              product={ this.props.product }
+              points={ store.state.currentUser.points }
+              redeemProduct={ store.state.redeemProduct }
+            />
           </div>
         }
       </Subscribe>

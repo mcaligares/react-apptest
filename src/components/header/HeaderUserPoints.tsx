@@ -18,21 +18,28 @@ export default class HeaderUserPoints extends React.Component<HeaderUserPointsPr
     return this.props.pointsChanged > 0 ? "ok" : this.props.pointsChanged < 0 ? "ko" : "";
   }
 
-  restorePoints() {
+  private restorePointsToCloseAnimation() {
     setTimeout(() => this.props.restorePointsChanged(), 1000);
   }
 
   render() {
     return (
       <div className="points">
-          { this.props.points }
-          <img src={coin} alt=""/>
-          <CSSTransition in={this.props.pointsChanged !== 0} timeout={1000} classNames="change" onEntered={ this.restorePoints.bind(this) }>
-            <span className={ this.classForPoints + " change" }>
-              { this.simbol + this.props.pointsChanged }
-            </span>
-          </CSSTransition>
-        </div>
+
+        { this.props.points } <img src={coin} alt=""/>
+
+        <CSSTransition
+          in={ this.props.pointsChanged !== 0 }
+          timeout={ 1000 }
+          classNames="change"
+          onEntered={ this.restorePointsToCloseAnimation.bind(this) }
+        >
+          <span className={ this.classForPoints + " change" }>
+            { this.simbol + this.props.pointsChanged }
+          </span>
+        </CSSTransition>
+
+      </div>
     );
   }
 

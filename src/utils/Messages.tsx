@@ -94,7 +94,7 @@ const haveSome = (count: number) => count > 2 && count < 5;
 const haveMany = (count: number) => count >= 5 && count < 10;
 const isShopaholic = (count: number) => count >= 10;
 
-export function getSpentPointsMessage(app: any, totalPointsSpend: number) {
+export function getSpentPointsMessage(totalPointsSpend: number) {
   return (
     <p>
       {

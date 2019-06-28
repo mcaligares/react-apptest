@@ -27,4 +27,4 @@ const filterByName = (product: Product, text: string) => {
       || product.category.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) >= 0
 };
 
-export {sortById, sortByLowerPrice, sortByHigherPrice, filterByName}
+export {sortById, sortByLowerPrice, sortByHigherPrice, filterByName};

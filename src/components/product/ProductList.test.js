@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'unstated';
-import AppState from '../../Store';
 import {render, cleanup} from '@testing-library/react';
+import ProductsStore from '../../store/ProductsStore';
 import ProductList from './ProductList';
 
 const user = { _id: 1, name: 'Chuck Norris', points: 999999999 };
@@ -12,7 +12,7 @@ const products = [
 
 const renderComponentWithProvider = (products) =>
   render(
-    <Provider inject={[new AppState({products, user})]}>
+    <Provider inject={[new ProductsStore({products, user})]}>
       <ProductList products={ products } />
     </Provider>
   );

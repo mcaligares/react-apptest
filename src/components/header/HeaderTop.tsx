@@ -1,39 +1,34 @@
 import React from 'react';
 import { Subscribe } from 'unstated';
 import { Link } from 'react-router-dom';
-import AppState from '../../Store';
-import User from '../../models/User';
+import UserStore from '../../store/UserStore';
 import HeaderUserPoints from './HeaderUserPoints';
 import loading from '../../assets/images/loading.svg';
 import aerolabLogo from '../../assets/images/logo.svg';
 
-type HeaderTopProps = {
-  user: User
-};
-
-export default class HeaderTop extends React.Component<HeaderTopProps> {
+export default class HeaderTop extends React.Component {
 
   render() {
     return (
-      <Subscribe to={[AppState]}>
+      <Subscribe to={[UserStore]}>
         { app =>
           <header className="top">
-            <Link to="/">
-              <img src={aerolabLogo} alt="AeroLab" />
-            </Link>
+            <Link to="/"> <img src={aerolabLogo} alt="AeroLab" /> </Link>
+
             <div className="flex-spacing"></div>
-            {
-              !this.props.user._id && <img src={loading} className="loading" alt="" />
-            }
-            {
-              this.props.user._id &&
-              <Link to="/profile">
-                <div className="profile">
-                  { this.props.user.name }
-                  <HeaderUserPoints points={ this.props.user.points } pointsChanged={ app.state.userPointsChanged } restorePointsChanged={ app.state.restoreUserPointsChanged } />
-                </div>
-              </Link>
-            }
+
+            <div className="profile">
+              <Link to="/profile"> { app.state.currentUser.name } </Link>
+              { app.state.loading && <img src={loading} className="loading" alt="" /> }
+              {
+                !app.state.loading &&
+                <HeaderUserPoints
+                  points={ app.state.currentUser.points }
+                  pointsChanged={ app.state.userPointsChanged }
+                  restorePointsChanged={ app.state.restoreUserPointsChanged }
+                />
+              }
+            </div>
           </header>
         }
       </Subscribe>

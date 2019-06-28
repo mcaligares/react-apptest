@@ -5,13 +5,9 @@ export type SortProps = {
   sortBy: Function
 };
 
-export default class Sort extends React.Component<SortProps, any> {
+export default class Sort extends React.Component<SortProps> {
 
-  constructor(props: any) {
-    super(props);
-    this.state = {value: 'recent'};
-    this.onSelect = this.onSelect.bind(this);
-  }
+  state = {value: 'recent'};
 
   isSelected(value: string) {
     return this.state.value === value ? 'selected' : '';
@@ -28,7 +24,13 @@ export default class Sort extends React.Component<SortProps, any> {
         <span>Sort by:</span>
         {
           this.props.values.map((item: any) =>
-            <button className={this.isSelected(item.value) + " button"} value={item.value} onClick={this.onSelect} key={item.value}>{item.text}</button>
+            <button
+              key={item.value}
+              className={this.isSelected(item.value) + " button"}
+              value={item.value} onClick={this.onSelect.bind(this)}
+            >
+              {item.text}
+            </button>
           )
         }
       </div>

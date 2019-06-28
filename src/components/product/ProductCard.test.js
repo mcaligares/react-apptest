@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'unstated';
-import AppState from '../../Store';
+import UserStore from '../../store/UserStore';
 import {render, cleanup} from '@testing-library/react';
 import ProductCard from './ProductCard';
 
@@ -8,7 +8,7 @@ const user = { _id: 1, name: 'Chuck Norris', points: 999999999 };
 const product = {name: 'Ultrabook', category: 'Laptops', cost: 1000, img: '/some/img.svg'};
 const renderComponentWithProvider = () =>
   render(
-    <Provider inject={[new AppState({user})]}>
+    <Provider inject={[new UserStore({user})]}>
       <ProductCard product={ product }/>
     </Provider>
   );

@@ -25,7 +25,9 @@ export default class ProductList extends React.Component<ProductListProps> {
         { this.props.children }
         <div className="product-list">
           { this.props.loading && <img src={ loadingIcon } className="loading" alt="" /> }
+
           { !this.props.loading && this.props.products.length === 0 && this.renderNotFound() }
+
           { this.props.products && this.props.products.map((p: Product) => <ProductCard product={p} key={p._id} />) }
         </div>
       </section>

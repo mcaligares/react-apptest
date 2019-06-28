@@ -10,4 +10,4 @@ export default class User {
     this.points = data.points;
   }
 
-}
+};

@@ -1,20 +1,17 @@
 import React from 'react';
 import { Subscribe } from 'unstated';
 import { Link } from 'react-router-dom';
-import closeIcon from '../assets/images/close.svg';
-import AppState from '../Store';
+import UserStore from '../store/UserStore';
 import Api from '../services/Api';
 import Product from '../models/Product';
 import * as msgUtil from '../utils/Messages';
+import closeIcon from '../assets/images/close.svg';
 import loadingIcon from '../assets/images/loading.svg';
 import ProductFavorite, { getFavoriteProduct } from '../models/ProductFavorite';
 
 export default class Profile extends React.Component<any, any> {
 
-  constructor(props: any) {
-    super(props);
-    this.state = { products: [], totalPointsSpent: 0, favoriteProduct: new ProductFavorite() };
-  }
+  state = { products: [], totalPointsSpent: 0, favoriteProduct: new ProductFavorite() };
 
   async componentDidMount() {
     const products = await Api.getHistory();
@@ -29,20 +26,20 @@ export default class Profile extends React.Component<any, any> {
 
   render() {
     return (
-      <Subscribe to={[AppState]}>
-        { app =>
+      <Subscribe to={[UserStore]}>
+        { store =>
           <section className="profile-page">
             <Link to="/"> <img src={ closeIcon } alt="close"/> </Link>
 
-            { app.state.loading && <img src={ loadingIcon } className="loading" alt="" /> }
+            { store.state.loading && <img src={ loadingIcon } className="loading" alt="" /> }
 
-            { !app.state.loading && msgUtil.getWelcomeMessage(app) }
+            { !store.state.loading && msgUtil.getWelcomeMessage(store) }
 
-            { !app.state.loading && msgUtil.getUserPointsMessage(app) }
+            { !store.state.loading && msgUtil.getUserPointsMessage(store) }
 
-            { !app.state.loading && msgUtil.getFavoriteProductMessage(this.state.favoriteProduct) }
+            { !store.state.loading && msgUtil.getFavoriteProductMessage(this.state.favoriteProduct) }
 
-            { !app.state.loading && msgUtil.getSpentPointsMessage(app, this.state.totalPointsSpent) }
+            { !store.state.loading && msgUtil.getSpentPointsMessage(this.state.totalPointsSpent) }
 
           </section>
         }

@@ -26,7 +26,7 @@ body {
       height: $header-height;
       background-color: $background;
       box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.10);
-      > a { text-decoration: none; color: inherit; }
+      a { text-decoration: none; color: inherit; }
     }
     .profile {
       font-weight: 500;

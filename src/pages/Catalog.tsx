@@ -1,13 +1,12 @@
 import React from 'react';
 import { Subscribe } from 'unstated';
-import AppState from '../Store';
+import ProductsStore from '../store/ProductsStore';
 import Header from '../components/product/header/Header';
 import ProductList from '../components/product/ProductList';
 import HeaderCategory from '../components/header/HeaderCategory';
 import categoryBackground from '../assets/images/header-category.png';
 
 export default class Catalog extends React.Component {
-
 
   electronicCategory = {
     title: 'Electronics',
@@ -22,18 +21,18 @@ export default class Catalog extends React.Component {
 
   render() {
     return (
-      <Subscribe to={[AppState]}>
-        { app =>
-        <section>
-          <HeaderCategory category={ this.electronicCategory } />
+      <Subscribe to={[ProductsStore]}>
+        { store =>
+          <section>
+            <HeaderCategory category={ this.electronicCategory } />
 
-          <ProductList products={ app.state.filteredProducts } loading={ app.state.loading }>
-            <Header
-              search={{ searchFor: app.state.searchFor }}
-              sort={{ values: this.sortValues, sortBy: app.state.sortBy }}
-            />
-          </ProductList>
-        </section>
+            <ProductList products={ store.state.filteredProducts } loading={ store.state.loading }>
+              <Header
+                search={{ searchFor: store.state.searchFor }}
+                sort={{ values: this.sortValues, sortBy: store.state.sortBy }}
+              />
+            </ProductList>
+          </section>
         }
       </Subscribe>
     );

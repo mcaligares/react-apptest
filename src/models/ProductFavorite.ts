@@ -5,7 +5,7 @@ export default class ProductFavorite {
     public count: number = 0,
     public product: Product = new Product({})
   ) {}
-}
+};
 
 export function getFavoriteProduct(products: Array<Product>) {
 
@@ -15,7 +15,7 @@ export function getFavoriteProduct(products: Array<Product>) {
   const maxCountAndId = getMaxCount(countsById);
 
   return populateProduct(maxCountAndId, products);
-}
+};
 
 const getCountsById = (products: Array<Product>) => {
   const countsById: any = {};
@@ -47,4 +47,4 @@ const populateProduct = (countAndId: any, products: Array<Product>) => {
   const product = products.find((product: Product) => product._id === countAndId.id);
 
   return product ? new ProductFavorite(countAndId.count, product) : new ProductFavorite();
-}
+};

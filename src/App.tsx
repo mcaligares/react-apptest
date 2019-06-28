@@ -1,49 +1,40 @@
 import React from 'react';
-import { Provider, Subscribe } from 'unstated';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import AppState from './Store';
+import { Provider } from 'unstated';
+import { Route } from 'react-router-dom';
 import User from './models/User';
-import Footer from './components/footer/Footer';
-import HeaderTop from './components/header/HeaderTop';
 import Profile from './pages/Profile';
 import Catalog from './pages/Catalog';
-
-const emptyUser = new User({});
+import Footer from './components/footer/Footer';
+import HeaderTop from './components/header/HeaderTop';
+import UserStore from './store/UserStore';
+import ProductsStore from './store/ProductsStore';
 
 export default class App extends React.Component {
 
   user: User;
-  container = new AppState({
-    loading: true,
-    products: [],
-    user: emptyUser
-  });
+  userStore = new UserStore();
+  productsStore = new ProductsStore();
 
   componentDidMount() {
-    this.container.fetchAllData();
+    this.userStore.fetchUserData();
+    this.productsStore.fetchAllProducts();
   }
 
   render() {
     return (
-      <Router>
-        <Provider inject={[this.container]}>
-          <Subscribe to={[this.container]}>
-            { app =>
-              <div className="App">
+      <Provider inject={[this.userStore, this.productsStore]}>
+        <div className="App">
 
-                <HeaderTop user={ app.state.currentUser } />
+          <HeaderTop />
 
-                <Route path="/" exact component={ Catalog }/>
+          <Route path="/" exact component={ Catalog }/>
 
-                <Route path="/profile" component={ Profile } />
+          <Route path="/profile" component={ Profile } />
 
-                <Footer />
+          <Footer />
 
-              </div>
-            }
-          </Subscribe>
-        </Provider>
-      </Router>
+        </div>
+      </Provider>
     );
   }
 

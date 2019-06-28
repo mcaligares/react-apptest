@@ -6,11 +6,6 @@ export type SearchProps = {
 
 export default class Search extends React.Component<SearchProps> {
 
-  constructor(props: SearchProps) {
-    super(props);
-    this.onChange = this.onChange.bind(this);
-  }
-
   onChange(event: ChangeEvent<HTMLInputElement>) {
     this.props.searchFor(event.target.value);
   }
@@ -18,7 +13,7 @@ export default class Search extends React.Component<SearchProps> {
   render() {
     return (
       <div className="search">
-        <input type="text" placeholder="Search..." onChange={ this.onChange }/>
+        <input type="text" placeholder="Search..." onChange={ this.onChange.bind(this) }/>
       </div>
     );
   }
