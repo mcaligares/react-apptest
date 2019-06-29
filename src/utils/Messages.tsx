@@ -32,8 +32,8 @@ export function getWelcomeMessage(app: any) {
 const isBeggar = (points: number) => points <= 0;
 const isPoor = (points: number) => points > 0 && points <= 1000;
 const hasPoints = (points: number) => points > 1000 && points <= 2000;
-const isRich = (points: number) => points > 2000 && points <= 5000;
-const isMillionaire = (points: number) => points > 5000 && points <= 10000;
+const isRich = (points: number) => points > 2000 && points <= 10000;
+const isMillionaire = (points: number) => points > 10000;
 
 export function getUserPointsMessage(app: any) {
   return (
@@ -60,7 +60,7 @@ export function getUserPointsMessage(app: any) {
       }
       {
         isMillionaire(app.state.currentUser.points) &&
-        <i>You are rock! <span role="img" aria-labelledby="rock">🤩</span></i>
+        <i>You have a lot of points! <span role="img" aria-labelledby="rock">🤩</span></i>
       }
     </p>
   );

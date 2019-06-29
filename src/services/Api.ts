@@ -38,6 +38,16 @@ class Api {
     return response.data.map((product: any) => new Product(product));
   }
 
+  async earnPoints(amount: number, points: number): Promise<number> {
+    try {
+      await this.baseApi.post('user/points', { amount });
+      return points + amount;
+    } catch (e) {
+      console.error('error on earn points', e);
+      return -1;
+    }
+  }
+
 }
 
 export default new Api(process.env.REACT_APP_API_URL, process.env.REACT_APP_API_TOKEN);

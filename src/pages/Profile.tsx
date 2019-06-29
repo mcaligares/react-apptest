@@ -45,7 +45,11 @@ export default class Profile extends React.Component<any, any> {
 
             { !this.state.loading && <p> <b>How to earn points? <span role="img" aria-labelledby="down">👇</span></b> </p> }
 
-            { !this.state.loading && <EarnPoints points={ this.pointsToEarn } /> }
+            { !this.state.loading &&
+              <div className="points-earn">
+                { this.pointsToEarn.map((points, i) => <EarnPoints points={ points } coins={(i+1)} earnPoints={ store.state.earnPoints } key={ i } />) }
+              </div>
+            }
 
           </section>
         }
