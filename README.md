@@ -79,3 +79,23 @@ El reto pedía que la opcion de canjear un producto apareciera cuando el usuario
 #### Buscador de productos
 
 Se agregó un buscador que realiza un filtro por nombre de producto y por nombre de categoría.
+
+#### Sección de perfil
+
+Se agergó una sección perfil para ver datos del usuario y poder agregar puntos a la cuenta.
+
+#### Imagen de precarga
+
+##### Problema
+
+Las imagenes de los productos tardan en cargarse y cuando lo hacen modifican el tamaño de las cards.
+
+##### Solución
+
+Se agregó una imagen de precarga que se mostrará hasta que la imagen del producto se descarge completamente. La implementación fue mediante CSS usando la propiedad `background-image`.
+
+## TODO
+
+#### Loading con skeleton
+
+Reemplazar el loading de productos por un skeleton.
