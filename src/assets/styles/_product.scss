@@ -107,18 +107,9 @@
         }
       }
     }
-    .button {
-      color: $white;
-      font-weight: 400;
-      background-color: $primary;
-      > img {
-        height: 35px;
-        filter: invert(0) sepia(0) saturate(0%) hue-rotate(148deg) brightness(200%) contrast(100%);
-      }
-      &.loading {
-        cursor: no-drop;
-        padding: 5px 32px;
-      }
+    .button-primary {
+      height: 50px;
+      padding: 0px 30px;
     }
     .points-needed {
       width: 80%;

@@ -62,9 +62,9 @@ export default class ProductAction extends React.Component<ProductActionProps, a
 
         {
           this.haveUserEnoughPointsToRedeemProduct() &&
-          <button className={ this.state.loading ? "loading button" : "button" } disabled={this.state.loading} onClick={ this.redeemProduct.bind(this) }>
+          <button className={ this.state.loading ? "loading button-primary" : "button-primary" } disabled={this.state.loading} onClick={ this.redeemProduct.bind(this) }>
             { !this.state.loading && 'Redeem now' }
-            { this.state.loading && <img src={ loadingIcon } alt="" /> }
+            { this.state.loading && <img className="loading" src={ loadingIcon } alt="" /> }
           </button>
         }
 

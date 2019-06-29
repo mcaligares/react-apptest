@@ -103,7 +103,7 @@ export function getSpentPointsMessage(totalPointsSpend: number) {
       }
       {
         !didntSpendPoints(totalPointsSpend) &&
-        <i>You have spent around { totalPointsSpend } points. </i>
+        <i>You have spent around <span>{ totalPointsSpend }</span> points. </i>
       }
       {
         spentSomePoints(totalPointsSpend) &&

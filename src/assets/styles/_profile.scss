@@ -2,7 +2,7 @@
 
 .profile-page {
   display: flex;
-  height: 90vh;
+  height: 100%;
   padding: 50px;
   color: $white;
   align-items: center;
@@ -15,9 +15,9 @@
   }
 
   > a > img {
-    right: 30px;
+    right: 15px;
     width: 30px;
-    position: absolute;
+    position: fixed;
     top: 40px + $header-height;
   }
 
@@ -26,5 +26,36 @@
     i { font-style: normal; }
     img { vertical-align: middle; }
     span:not([role]) { text-decoration: underline; }
+  }
+
+  .points-earn {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    button.button-primary {
+      margin: 10px;
+      width: 200px;
+      font-weight: 500;
+      padding: 15px 30px;
+      font-size: $big-font;
+      transition: all .2s ease-in-out;
+      box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.10);
+      .coins {
+        height: 33px;
+        width: 140px;
+        padding-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        > img {
+          height: 45px;
+        }
+      }
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.5);
+      }
+    }
   }
 }

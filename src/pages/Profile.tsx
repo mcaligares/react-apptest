@@ -8,16 +8,18 @@ import * as msgUtil from '../utils/Messages';
 import closeIcon from '../assets/images/close.svg';
 import loadingIcon from '../assets/images/loading.svg';
 import ProductFavorite, { getFavoriteProduct } from '../models/ProductFavorite';
+import EarnPoints from '../components/points/EarnPoints';
 
 export default class Profile extends React.Component<any, any> {
 
-  state = { products: [], totalPointsSpent: 0, favoriteProduct: new ProductFavorite() };
+  pointsToEarn = [1000, 5000, 7500];
+  state = { loading: true, products: [], totalPointsSpent: 0, favoriteProduct: new ProductFavorite() };
 
   async componentDidMount() {
     const products = await Api.getHistory();
     const favoriteProduct = getFavoriteProduct(products);
     const totalPointsSpent = this.getTotalPointsSpend(products);
-    this.setState({ products, favoriteProduct, totalPointsSpent });
+    this.setState({ loading: false, products, favoriteProduct, totalPointsSpent });
   }
 
   private getTotalPointsSpend(products: Array<Product>) {
@@ -31,15 +33,19 @@ export default class Profile extends React.Component<any, any> {
           <section className="profile-page">
             <Link to="/"> <img src={ closeIcon } alt="close"/> </Link>
 
-            { store.state.loading && <img src={ loadingIcon } className="loading" alt="" /> }
+            { this.state.loading && <img src={ loadingIcon } className="loading" alt="" /> }
 
-            { !store.state.loading && msgUtil.getWelcomeMessage(store) }
+            { !this.state.loading && msgUtil.getWelcomeMessage(store) }
 
-            { !store.state.loading && msgUtil.getUserPointsMessage(store) }
+            { !this.state.loading && msgUtil.getUserPointsMessage(store) }
 
-            { !store.state.loading && msgUtil.getFavoriteProductMessage(this.state.favoriteProduct) }
+            { !this.state.loading && msgUtil.getFavoriteProductMessage(this.state.favoriteProduct) }
 
-            { !store.state.loading && msgUtil.getSpentPointsMessage(this.state.totalPointsSpent) }
+            { !this.state.loading && msgUtil.getSpentPointsMessage(this.state.totalPointsSpent) }
+
+            { !this.state.loading && <p> <b>How to earn points? <span role="img" aria-labelledby="down">👇</span></b> </p> }
+
+            { !this.state.loading && <EarnPoints points={ this.pointsToEarn } /> }
 
           </section>
         }
