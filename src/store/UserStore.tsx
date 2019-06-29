@@ -54,7 +54,7 @@ export default class UserStore extends Container<UserStoreType> {
     const haveUserEnoughPointsToRedeemProduct = (price: number, points: number) => points - price >= 0;
 
     if (haveUserEnoughPointsToRedeemProduct(product.cost, points)) {
-      const pointsUpdated = points - product.cost;//await Api.claimProduct(product, points);
+      const pointsUpdated = await Api.claimProduct(product, points);
       if (wasRedeemed(pointsUpdated)) {
         this.setUserPoints(pointsUpdated, -product.cost);
         return true;
